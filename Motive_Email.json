@@ -1,0 +1,115 @@
+{
+  "name": "Motive_Email",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "name": "Daily Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -112
+      ],
+      "id": "e11c742d-eac2-41d1-b7d6-0780f6b4adc4"
+    },
+    {
+      "parameters": {
+        "sendTo": "akhileshyadav52361@gmail.com",
+        "subject": "Your Daily Motivational story",
+        "message": "={{ $json.message.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        816,
+        -112
+      ],
+      "id": "cb2a0f6c-e454-4b15-bca7-1a04b6364d75",
+      "name": "Send a message",
+      "webhookId": "b747ac0d-da7d-4bcc-a2de-5cab5a27b5a0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "d7YuVDlTOeoFmxDR",
+          "name": "Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Generate a motivational story. The first line should ONLY be the story title in quotation marks. From the second line onwards, write the full story."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        384,
+        -112
+      ],
+      "id": "122cb7da-8fec-43bb-a469-1edc542432a5",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "pNowJHkNLIyTSaui",
+          "name": "new"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "dd51e12d-73f7-42d4-bdfe-688456e12232",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2143bbab0046a29ff233d0225fd33fbe065863ee6490e9e4402496708a049faa"
+  },
+  "id": "kUD9aOaQlXOJyC4W",
+  "tags": []
+}
