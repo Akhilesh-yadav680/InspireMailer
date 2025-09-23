@@ -9,7 +9,10 @@ InspireMailer is an AI-driven email automation tool designed to send motivationa
 - Personalized email templates
 - Easy setup with email service providers (SMTP)
 - Scalable for individual or group users
+- 
+### Sample Usage
 
+![InspireMailer](sample.png)
 ## Installation
 
 1. Clone the repo  
